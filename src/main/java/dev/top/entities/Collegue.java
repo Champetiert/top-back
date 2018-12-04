@@ -1,5 +1,9 @@
 package dev.top.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,17 +17,18 @@ public class Collegue {
 	private int id;
 	private String pseudo;
 	private int score;
-	private String imageUrl;
+	@ElementCollection
+	private List<String> imageUrl;
 	
 	public Collegue() {
 		super();
 	}
 	
-	public Collegue( String pseudo,int score, String imageUrl) {
+	public Collegue( String pseudo,int score,List<String> imageUrl) {
 		super();
 		this.score = score;
 		this.pseudo = pseudo;
-		this.imageUrl = imageUrl;
+		this.imageUrl= new ArrayList<>(imageUrl);
 	}
 	public int getId() {
 		return id;
@@ -43,10 +48,13 @@ public class Collegue {
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
-	public String getImageUrl() {
+
+	public List<String> getImageUrl() {
 		return imageUrl;
 	}
-	public void setImageUrl(String imageUrl) {
+
+	public void setImageUrl(List<String> imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+
 }
