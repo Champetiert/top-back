@@ -32,7 +32,7 @@ public class CollegueCtrl {
     
     @PatchMapping("/{pseudo}")
     public Collegue updateScore(@PathVariable String pseudo,@RequestBody ActionButton action) {
-    	Collegue col = collegueRepo.findByPseudo("Alexis");
+    	Collegue col = collegueRepo.findByPseudo(pseudo);
     		System.out.println(col);
     		if (action.getAction()==Avis.AIMER) {
     			col.setScore(col.getScore()+10);
