@@ -36,6 +36,7 @@ public class StartupDataInit {
         	List<String>b=new ArrayList<>();
         	List<String>c=new ArrayList<>();
         	List<String>d=new ArrayList<>();
+        	List<String>master=new ArrayList<>();
         	a.add("https://wallpapercave.com/wp/wp1811952.jpg");
         	a.add("https://wallpapersite.com/images/pages/pic_w/1799.jpg");
         	a.add("http://hdqwalls.com/wallpapers/skyscraper-movie-10k-ve.jpg");
@@ -49,10 +50,14 @@ public class StartupDataInit {
         	d.add("http://www.nord-cinema.com/wp-content/uploads/2017/02/le-cinquieme-element.jpg");
         	d.add("https://s22295.pcdn.co/wp-content/uploads/Die-Hard1.jpg");
 	
+        	master.add("https://stmed.net/sites/default/files/chuck-norris-wallpapers-26561-3401916.jpg");
+        	master.add("https://icdn2.digitaltrends.com/image/ex2norris-2000x864.jpg?ver=1");
+        	master.add("https://vignette.wikia.nocookie.net/villains/images/d/de/Chuck_Norris_in_Way_of_the_Dragonvillainswiki.jpg/revision/latest?cb=20160212022414");
         	this.collegueRepo.save(new Collegue("Stephane", 300,a));
         	this.collegueRepo.save(new Collegue("Alexis",300,b));
         	this.collegueRepo.save(new Collegue("Florian", 300,c));
         	this.collegueRepo.save(new Collegue("Matthieu",200,d));
+        	this.collegueRepo.save(new Collegue("Chuck",1000,master,"Norris","Chuck","ChuckNorris@Chuck.Norris","Chuck Norris Ranch, 77868 Navasota, United States"));
         }
 
     }
