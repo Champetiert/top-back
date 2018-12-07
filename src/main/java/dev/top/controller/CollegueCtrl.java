@@ -22,6 +22,7 @@ import dev.top.entities.ActionButton;
 import dev.top.entities.Avis;
 import dev.top.entities.Collegue;
 import dev.top.entities.Vote;
+import dev.top.entities.apiEntities.CollegueApi;
 import dev.top.repos.CollegueRepo;
 import dev.top.repos.VoteRepo;
 
@@ -64,8 +65,8 @@ public class CollegueCtrl {
 	@PostMapping("/nouveau")
 	public ResponseEntity create(@RequestBody Map<String, String> form) {
 		RestTemplate rt = new RestTemplate();
-		Collegue[] listCollegue = rt.getForObject(
-				"http://collegues-api.cleverapps.io/collegues?matricule=" + form.get("matricule"), Collegue[].class);
+		CollegueApi[] listCollegue = rt.getForObject(
+				"http://collegues-api.cleverapps.io/collegues?matricule=" + form.get("matricule"), CollegueApi[].class);
 		if (listCollegue.length > 0) {
 
 			Collegue collegue = new Collegue();
@@ -74,14 +75,16 @@ public class CollegueCtrl {
 			collegue.setEmail(listCollegue[0].getEmail());
 			collegue.setAdresse(listCollegue[0].getAdresse());
 			collegue.setPseudo(form.get("pseudo"));
-			if (form.get("pseudo") != null) {
-				String[] listImg = { form.get("pseudo") };
+			if (form.get("imgUrl") != null) {
+				String[] listImg = { form.get("imgUrl") };
 				collegue.setImageUrl(Arrays.asList(listImg));
 			} else {
-				collegue.setImageUrl(listCollegue[0].getImageUrl());
+				String[] listImg= {listCollegue[0].getPhoto()};
+
+				collegue.setImageUrl(Arrays.asList(listImg));
 			}
 			collegueRepo.save(collegue);
-			return ResponseEntity.status(HttpStatus.OK).body("request sucess");
+			return ResponseEntity.status(HttpStatus.OK).body("ok");
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad matricule");
 		}
